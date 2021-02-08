@@ -37,8 +37,13 @@ pip install <package>
 
 It will get installed in the `env/` folder, and not conflict with other projects.
 
+To install all the required packages, run the following command within the virtual environment:
 
-To leave the virtual environment run:
+```
+pip install -r requirements.txt
+```
+
+Once you are done working, terminate the virtual environment with the following command:
 
 ```
 deactivate
