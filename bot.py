@@ -8,7 +8,11 @@ class MyClient(discord.Client):
         print('Logged in as {0}!'.format(self.user))
 
     async def on_message(self, message):
-        print('Message from {0.author}: {0.content}'.format(message))
+        if self.user == message.author:
+            return
+        elif guild.system.channel is not None:
+            to_send = (f'Message from: {message.author}')
+            await guild.system_channel.send(to_send)
 
 
 if __name__ == '__main__':
