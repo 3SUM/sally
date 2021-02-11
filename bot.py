@@ -1,24 +1,29 @@
 import os
 import discord
+from discord.ext import commands
 
 TOKEN = os.environ.get('TOKEN')
 
-class MyClient(discord.Client):
-    async def on_ready(self):
-        print('Logged in as {0}!'.format(self.user))
+class Sally:
+    def __init__(self, bot):
+        self.bot = bot
 
-    async def on_message(self, message):
-        channel = message.channel
-        if self.user == message.author:
-            return
-        elif channel is not None:
-            to_send = (f'Message from: {message.author}')
-            await channel.send(to_send)
+    @bot.event
+    async def on_ready(self):
+        print(f'Logged in as {self.bot.user.name}')
+    
+    @bot.command()
+    async def add(self, ctx, left: int, right: int):
+        await ctx.send(left + right)
+    
+    def main(self):
+        self.bot.run(TOKEN)
 
 
 if __name__ == '__main__':
     intents = discord.Intents.default()
     intents.members = True
     
-    client = MyClient(intents=intents)
-    client.run(TOKEN)
+    bot = commands.Bot(command_prefix='!', intents=intents)
+    sally = Sally(bot)
+    sally.main()
