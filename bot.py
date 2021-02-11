@@ -10,11 +10,11 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 class Sally:
     courses = [
-        135,
-        202,
-        218,
-        219,
-        370
+        '135',
+        '202',
+        '218',
+        '219',
+        '370'
     ]
 
     @bot.event
@@ -26,11 +26,15 @@ class Sally:
         await ctx.send(left + right)
 
     @bot.command()
-    async def ticket(ctx, course: int):
-        if course in Sally.courses:
-            await ctx.send(f'Selected course tick: {course}')
+    async def ticket(ctx, course):
+        if str(course) in Sally.courses:
+            await ctx.send(f'Selected course ticket: {course}')
         else:
-            await ctx.send(f'Usage: !ticket <135/202/218/219/370>')
+            await ctx.send(f'!ticket <course number>`\n\n access course number options using `!classes`')
+
+    @bot.command()
+    async def classes(ctx):
+        await ctx.send(f'```135\n202\n218\n219\n370```')
     
     def main():
         bot.run(TOKEN)
