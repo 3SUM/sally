@@ -30,7 +30,7 @@ class Sally:
         if course in Sally.courses:
             await ctx.send(f'Selected course tick: {course}')
         else:
-            await ctx.send(f'Invalid course: {course}')
+            await ctx.send(f'Usage: !ticket <135/202/218/219/370>')
     
     def main():
         bot.run(TOKEN)
