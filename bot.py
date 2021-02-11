@@ -30,7 +30,7 @@ class Sally:
         if str(course) in Sally.courses:
             await ctx.send(f'Selected course ticket: {course}')
         else:
-            await ctx.send(f'`!ticket <course number>`\n\n access course number options using `!classes`')
+            await ctx.send(f'`!ticket <course number>`\n\nAccess course number options using `!classes`')
 
     @bot.command()
     async def classes(ctx):
