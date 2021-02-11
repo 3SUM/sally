@@ -26,7 +26,7 @@ class Sally:
         await ctx.send(left + right)
 
     @bot.command()
-    async def ticket(ctx, course):
+    async def ticket(ctx, course = "default"):
         if str(course) in Sally.courses:
             await ctx.send(f'Selected course ticket: {course}')
         else:
