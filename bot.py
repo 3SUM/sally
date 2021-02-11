@@ -34,7 +34,7 @@ class Sally:
 
     @bot.command()
     async def classes(ctx):
-        await ctx.send(f'```\n135\n202\n218\n219\n370```')
+        await ctx.send(f'`135`\n`202`\n`218`\n`219`\n`370`')
     
     def main():
         bot.run(TOKEN)
