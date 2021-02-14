@@ -36,6 +36,10 @@ class Sally:
     async def classes(ctx):
         await ctx.send(f'Course Number Options:  `135`  `202`  `218`  `219`  `370`')
     
+    @bot.event
+    async def on_message(message):
+        await message.channel.send(f'Message sent by {message.author}')
+
     def main():
         bot.run(TOKEN)
 
