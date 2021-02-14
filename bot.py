@@ -43,7 +43,10 @@ class Sally:
         
         content = message.content.upper()
         if(content.find("THANK YOU") > -1):
-            await message.channel.send(f'Thank you {message.mentions[1]}')
+            print(message.mentions)
+            mentions = {message.mentions[i]: message.mentions[i + 1] for i in range(0, len(message.mentions), 2)}
+            print(mentions)
+            #await message.channel.send(f'Thank you {message.mentions[1]}')
             #await message.channel.send(f'Gave +1 Rep to {message.mentions[name]}#{message.mentions.discriminator}')
 
     def main():
