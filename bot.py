@@ -44,7 +44,7 @@ class Sally:
         content = message.content.upper()
         if(content.find("THANK YOU") > -1):
             for i in message.mentions:
-                if i != message.author:
+                if i != message.author and i != bot.user:
                     await message.channel.send(f'Gave +1 Rep to {i.mention}')
 
     def main():
