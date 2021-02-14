@@ -45,7 +45,7 @@ class Sally:
         if(content.find("THANK YOU") > -1):
             print(message.mentions)
             for i in message.mentions:
-                await message.channel.send(f'Gave +1 Rep to {i}')
+                await message.channel.send(f'Gave +1 Rep to @{i}')
 
     def main():
         bot.run(TOKEN)
