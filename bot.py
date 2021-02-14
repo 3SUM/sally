@@ -38,6 +38,9 @@ class Sally:
     
     @bot.event
     async def on_message(message):
+        if(message.author == bot.user)
+            return
+        
         await message.channel.send(f'Message sent by {message.author}')
 
     def main():
