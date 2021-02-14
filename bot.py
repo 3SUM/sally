@@ -42,6 +42,8 @@ class Sally:
             return
         
         await message.channel.send(f'Message sent by {message.author}')
+        if(message.content.find("Thank you") > -1):
+            await message.channel.send(f'Thank you {message.author}')
 
     def main():
         bot.run(TOKEN)
