@@ -44,7 +44,7 @@ class Sally:
         content = message.content.upper()
         if(content.find("THANK YOU") > -1):
             await message.channel.send(f'Thank you {message.mentions}')
-            await message.chaneel.send(f'Gave +1 Rep to {message.mentions.name}#{message.mentions.discriminator}')
+            await message.channel.send(f'Gave +1 Rep to {message.mentions.name}#{message.mentions.discriminator}')
 
     def main():
         bot.run(TOKEN)
