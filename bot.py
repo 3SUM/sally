@@ -20,7 +20,18 @@ class Sally:
     @bot.event
     async def on_ready():
         print(f'Logged in as {bot.user.name}')
-        print(bot.guilds)
+        guild = discord.utils.get(bot.guilds, name="SALLY HQ")
+        if guild is not None:
+            if discord.utils.get(guild.categories, name="Server Stats") is None:
+                category = await guild.create_category(name="Server Stats")
+                overwrites = {
+                    guild.default_role: discord.PermissionOverwrite(connect=False)
+                }
+                await guild.create_voice_channel(
+                    name=(f'Member Count: {guild.member_count}'),
+                    overwrites=overwrites,
+                    category=category
+                )
     
     @bot.command()
     async def close(ctx):
