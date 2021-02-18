@@ -30,8 +30,8 @@ class Sally:
         if str(course) in Sally.courses:
             guild = ctx.message.guild
             print(guild.channels)
-            print(discord.utils.get(guild.channels, name=(f'ticket-{course}-{ctx.message.author}')))
-            if discord.utils.get(guild.channels, name=(f'ticket-{course}-{ctx.message.author}')):
+            print(discord.utils.get(guild.channels, name=(f'ticket-{course}-{ctx.message.author.name.lower()}')))
+            if discord.utils.get(guild.channels, name=(f'ticket-{course}-{ctx.message.author.name.lower()}')):
                 failed_embed = discord.Embed(
                     title="Failed to create a ticket",
                     description="You already have a ticket open, please don't try to open a ticket while you already have one.",
@@ -44,7 +44,7 @@ class Sally:
                     ctx.message.author: discord.PermissionOverwrite(read_messages=True)
                 }
                 ticket_create = await guild.create_text_channel(
-                    name=(f'ticket-{course}-{ctx.message.author}'),
+                    name=(f'ticket-{course}-{ctx.message.author.name}'),
                     overwrites=overwrites
                 )
                 ticket_embed = discord.Embed(
