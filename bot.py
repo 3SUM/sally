@@ -29,8 +29,6 @@ class Sally:
     async def ticket(ctx, course = "default"):
         if str(course) in Sally.courses:
             guild = ctx.message.guild
-            print(guild.channels)
-            print(discord.utils.get(guild.channels, name=(f'ticket-{course}-{ctx.message.author.name.lower()}')))
             if discord.utils.get(guild.channels, name=(f'ticket-{course}-{ctx.message.author.name.lower()}')):
                 failed_embed = discord.Embed(
                     title="Failed to create a ticket",
@@ -64,11 +62,16 @@ class Sally:
                 )
                 await ctx.send(embed=success_embed)
         else:
-            await ctx.send(f'`!ticket <course number>`\n\nAccess course number options using `!classes`')
+            await ctx.send(f'`!ticket <course number>`\n\nInvalid course number provided, access course number options using `!courses`')
 
     @bot.command()
-    async def classes(ctx):
-        await ctx.send(f'Course Number Options:  `135`  `202`  `218`  `219`  `370`')
+    async def courses(ctx):
+        courses_embed = discord.Embed(
+            title="Courses",
+            description=(f'Course Number Options:  `135`  `202`  `218`  `219`  `370`'),
+            color=0xF8E71C
+        )
+        await ctx.send(embed=courses_embed)
     
     @bot.event
     async def on_member_join(member):
