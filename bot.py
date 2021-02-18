@@ -31,9 +31,9 @@ class Sally:
             if ctx.message.channel.name.find("ticket") > -1:
                 await ctx.message.channel.delete()
             else:
-                ctx.send("Unable to close, this is not a ticket!")
+                await ctx.send("Unable to close, this is not a ticket!")
         else:
-            ctx.send("You do not have the necessary permissions to close a ticket!")
+            await ctx.send("You do not have the necessary permissions to close a ticket!")
 
     @bot.command()
     async def ticket(ctx, course = "default"):
