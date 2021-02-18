@@ -29,6 +29,8 @@ class Sally:
     async def ticket(ctx, course = "default"):
         if str(course) in Sally.courses:
             guild = ctx.message.guild
+            print(guild.channels)
+            print(discord.utils.get(guild.channels, name=(f'ticket-{course}-{ctx.message.author}')))
             if discord.utils.get(guild.channels, name=(f'ticket-{course}-{ctx.message.author}')):
                 failed_embed = discord.Embed(
                     title="Failed to create a ticket",
