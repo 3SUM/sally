@@ -29,6 +29,7 @@ class Sally:
     async def ticket(ctx, course = "default"):
         if str(course) in Sally.courses:
             await ctx.send(f'Selected course ticket: {course}')
+            print(ctx.message.guild)
         else:
             await ctx.send(f'`!ticket <course number>`\n\nAccess course number options using `!classes`')
 
