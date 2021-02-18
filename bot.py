@@ -71,6 +71,10 @@ class Sally:
         await ctx.send(f'Course Number Options:  `135`  `202`  `218`  `219`  `370`')
     
     @bot.event
+    async def on_member_join(member):
+        print(discord.utils.get(member.server.roles))
+    
+    @bot.event
     async def on_message(message):
         if(message.author == bot.user):
             return
