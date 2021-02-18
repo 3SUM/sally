@@ -62,10 +62,10 @@ class Sally:
                 )
                 await ctx.send(embed=success_embed)
         else:
-            await ctx.send(f'`!ticket <course number>`\n\nAccess course number options using `!classes`')
+            await ctx.send(f'`!ticket <course number>`\n\nInvalid course number provided, refer to `!courses`')
 
     @bot.command()
-    async def classes(ctx):
+    async def courses(ctx):
         await ctx.send(f'Course Number Options:  `135`  `202`  `218`  `219`  `370`')
     
     @bot.event
