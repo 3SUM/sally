@@ -46,6 +46,7 @@ class Sally:
             for i in message.mentions:
                 if i != message.author and i != bot.user:
                     await message.channel.send(f'Gave +1 Rep to {i.mention}')
+        await bot.process_commands(message)
 
     def main():
         bot.run(TOKEN)
