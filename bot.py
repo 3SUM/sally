@@ -72,7 +72,8 @@ class Sally:
     
     @bot.event
     async def on_member_join(member):
-        print(member.guild.roles)
+        role = discord.utils.get(member.guild.roles, name="Student")
+        await discord.Member.add_roles(member, role)
     
     @bot.event
     async def on_message(message):
