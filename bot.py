@@ -23,6 +23,7 @@ class Sally:
     
     @bot.command()
     async def close(ctx):
+        guild = ctx.message.guild
         member = ctx.message.author
         member_roles = member.roles
         ta_role = discord.utils.get(guild.roles, name="TA")
