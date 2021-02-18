@@ -22,8 +22,8 @@ class Sally:
         print(f'Logged in as {bot.user.name}')
         guild = discord.utils.get(bot.guilds, name="SALLY HQ")
         if guild is not None:
-            if discord.utils.get(guild.categories, name="Server Stats") is None:
-                category = await guild.create_category(name="Server Stats")
+            if discord.utils.get(guild.categories, name="🚀 Server Stats 🚀") is None:
+                category = await guild.create_category(name="🚀 Server Stats 🚀")
                 overwrites = {
                     guild.default_role: discord.PermissionOverwrite(connect=False)
                 }
