@@ -62,16 +62,11 @@ class Sally:
                 )
                 await ctx.send(embed=success_embed)
         else:
-            await ctx.send(f'`!ticket <course number>`\n\nInvalid course number provided, refer to `!courses`')
+            await ctx.send(f'`!ticket <course number>`\n\nAccess course number options using `!classes`')
 
     @bot.command()
-    async def courses(ctx):
-        courses_embed = discord.Embed(
-            title="Courses",
-            description=(f'Course Number Options:  `135`  `202`  `218`  `219`  `370`'),
-            color=0xF8E71C
-        )
-        await ctx.send(embed=courses_embed)
+    async def classes(ctx):
+        await ctx.send(f'Course Number Options:  `135`  `202`  `218`  `219`  `370`')
     
     @bot.event
     async def on_member_join(member):
