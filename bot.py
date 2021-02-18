@@ -22,8 +22,17 @@ class Sally:
         print(f'Logged in as {bot.user.name}')
     
     @bot.command()
-    async def add(ctx, left: int, right: int):
-        await ctx.send(left + right)
+    async def close(ctx):
+        member = ctx.message.author
+        member_roles = member.roles
+        ta_role = discord.utils.get(guild.roles, name="TA")
+        if ta_role in member_roles:
+            if ctx.message.channel.name.find("ticket") > -1:
+                await ctx.message.channel.delete()
+            else:
+                ctx.send("Unable to close, this is not a ticket!")
+        else:
+            ctx.send("You do not have the necessary permissions to close a ticket!")
 
     @bot.command()
     async def ticket(ctx, course = "default"):
