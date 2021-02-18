@@ -20,6 +20,7 @@ class Sally:
     @bot.event
     async def on_ready():
         print(f'Logged in as {bot.user.name}')
+        print(bot.guilds)
     
     @bot.command()
     async def close(ctx):
@@ -82,8 +83,15 @@ class Sally:
     
     @bot.event
     async def on_member_join(member):
-        role = discord.utils.get(member.guild.roles, name="Student")
+        guild = member.guild
+        role = discord.utils.get(guild.roles, name="Student")
         await discord.Member.add_roles(member, role)
+
+        print(discord.utils.get(guild.categories))
+        if(discord.utils.get(guild.categories, name="Text Channels")):
+            print("category exists")
+
+
     
     @bot.event
     async def on_message(message):
