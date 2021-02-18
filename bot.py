@@ -72,7 +72,7 @@ class Sally:
     
     @bot.event
     async def on_member_join(member):
-        print(discord.utils.get(member.guild.roles))
+        print(discord.utils.get(bot.guild.roles))
     
     @bot.event
     async def on_message(message):
