@@ -31,14 +31,18 @@ class Sally:
         role = discord.utils.get(guild.roles, name="Student")
         await discord.Member.add_roles(member, role)
 
-        channel = discord.utils.get(guild.voice_channels, name=(f"Member Count: {guild.member_count - 1}"))
+        channel = discord.utils.get(
+            guild.voice_channels, name=(f"Member Count: {guild.member_count - 1}")
+        )
         if channel is not None:
             await channel.edit(name=(f"Member Count: {guild.member_count}"))
 
     @bot.event
     async def on_member_remove(member):
         guild = member.guild
-        channel = discord.utils.get(guild.voice_channels, name=(f"Member Count: {guild.member_count + 1}"))
+        channel = discord.utils.get(
+            guild.voice_channels, name=(f"Member Count: {guild.member_count + 1}")
+        )
         if channel is not None:
             await channel.edit(name=(f"Member Count: {guild.member_count}"))
 
