@@ -37,11 +37,11 @@ class Sally:
                 )
                 await ctx.send(embed=failed_embed)
             else:
-                print(guild.default_role)
+                ta = discord.utils.get(guild.roles, name=course)
+                print(ta)
                 overwrites = {
                     guild.default_role: discord.PermissionOverwrite(read_messages=False),
                     ctx.message.author: discord.PermissionOverwrite(read_messages=True),
-                    course: discord.PermissionOverwrite(read_messages=True)
                 }
                 ticket_create = await guild.create_text_channel(
                     name=(f'ticket-{course}-{ctx.message.author.name}'),
