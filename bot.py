@@ -29,30 +29,38 @@ class Sally:
     async def ticket(ctx, course = "default"):
         if str(course) in Sally.courses:
             guild = ctx.message.guild
-            overwrites = {
-                guild.default_role: discord.PermissionOverwrite(read_messages=False),
-                ctx.message.author: discord.PermissionOverwrite(read_messages=True)
-            }
-            ticket_create = await guild.create_text_channel(
-                name=(f'ticket-{course}-{ctx.message.author}'),
-                overwrites=overwrites
-            )
-            ticket_embed = discord.Embed(
-                title="Ticket",
-                description=(f'{ctx.message.author.mention}\nPlease be patient. A TA will be with you shortly.'),
-                color=0x15a513
-            )
-            ticket_embed.set_footer(
-                text=(f'Ticket requested by {ctx.message.author}'),
-                icon_url=ctx.message.author.avatar_url
-            )
-            await ticket_create.send(embed=ticket_embed)
-            success_embed = discord.Embed(
-                title="Ticket Creation",
-                description=(f'{ctx.message.author.mention}, your ticket was successfully created: {ticket_create.mention}'),
-                color=0x15a513
-            )
-            await ctx.send(embed=success_embed)
+            if discord.utils.get(guild.channels, name=(f'ticket-{course}-{ctx.message.author}')):
+                failed_embed = discord.Embed(
+                    title="Failed to create a ticket",
+                    description="You already have a ticket open, please don't try to open a ticket while you already have one.",
+                    color=0xe73c24
+                )
+                await ctx.send(embed=failed_embed)
+            else:
+                overwrites = {
+                    guild.default_role: discord.PermissionOverwrite(read_messages=False),
+                    ctx.message.author: discord.PermissionOverwrite(read_messages=True)
+                }
+                ticket_create = await guild.create_text_channel(
+                    name=(f'ticket-{course}-{ctx.message.author}'),
+                    overwrites=overwrites
+                )
+                ticket_embed = discord.Embed(
+                    title="Ticket",
+                    description=(f'{ctx.message.author.mention}\nPlease be patient. A TA will be with you shortly.'),
+                    color=0x15a513
+                )
+                ticket_embed.set_footer(
+                    text=(f'Ticket requested by {ctx.message.author}'),
+                    icon_url=ctx.message.author.avatar_url
+                )
+                await ticket_create.send(embed=ticket_embed)
+                success_embed = discord.Embed(
+                    title="Ticket Creation",
+                    description=(f'{ctx.message.author.mention}, your ticket was successfully created: {ticket_create.mention}'),
+                    color=0x15a513
+                )
+                await ctx.send(embed=success_embed)
         else:
             await ctx.send(f'`!ticket <course number>`\n\nAccess course number options using `!classes`')
 
