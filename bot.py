@@ -9,7 +9,7 @@ intents.members = True
 bot = commands.Bot(command_prefix='!', intents=intents)
 
 class Sally:
-    courses = [
+    courses_list = [
         '135',
         '202',
         '218',
@@ -27,7 +27,7 @@ class Sally:
 
     @bot.command()
     async def ticket(ctx, course = "default"):
-        if str(course) in Sally.courses:
+        if str(course) in Sally.courses_list:
             guild = ctx.message.guild
             if discord.utils.get(guild.channels, name=(f'ticket-{course}-{ctx.message.author.name.lower()}')):
                 failed_embed = discord.Embed(
