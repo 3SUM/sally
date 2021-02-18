@@ -18,6 +18,37 @@ class Sally:
     ]
 
     @bot.event
+    async def on_guild_join(guild):
+        if discord.utils.get(guild.categories, name="🚀 Server Stats 🚀") is None:
+            category = await guild.create_category(name="🚀 Server Stats 🚀")
+            overwrites = {
+                guild.default_role: discord.PermissionOverwrite(connect=False)
+            }
+            await guild.create_voice_channel(
+                name=(f'Member Count: {guild.member_count}'),
+                overwrites=overwrites,
+                category=category
+            )
+
+    @bot.event
+    async def on_member_join(member):
+        guild = member.guild
+        role = discord.utils.get(guild.roles, name="Student")
+        await discord.Member.add_roles(member, role)
+
+    @bot.event
+    async def on_message(message):
+        if(message.author == bot.user):
+            return
+        
+        content = message.content.upper()
+        if(content.find("THANK YOU") > -1):
+            for i in message.mentions:
+                if i != message.author and i != bot.user:
+                    await message.channel.send(f'Gave +1 Rep to {i.mention}')
+        await bot.process_commands(message)
+
+    @bot.event
     async def on_ready():
         print(f'Logged in as {bot.user.name}')
         guild = discord.utils.get(bot.guilds, name="SALLY HQ")
@@ -32,7 +63,7 @@ class Sally:
                     overwrites=overwrites,
                     category=category
                 )
-    
+
     @bot.command()
     async def close(ctx):
         guild = ctx.message.guild
@@ -47,6 +78,10 @@ class Sally:
         else:
             await ctx.send("You do not have the necessary permissions to close a ticket!")
 
+    @bot.command()
+    async def courses(ctx):
+        await ctx.send(f'Course Number Options:  `135`  `202`  `218`  `219`  `370`')
+        
     @bot.command()
     async def ticket(ctx, course = "default"):
         if str(course) in Sally.courses_list:
@@ -87,34 +122,6 @@ class Sally:
                 await ctx.send(embed=success_embed)
         else:
             await ctx.send(f'`!ticket <course number>`\n\nInvalid course number, refer to `!courses`')
-
-    @bot.command()
-    async def courses(ctx):
-        await ctx.send(f'Course Number Options:  `135`  `202`  `218`  `219`  `370`')
-    
-    @bot.event
-    async def on_member_join(member):
-        guild = member.guild
-        role = discord.utils.get(guild.roles, name="Student")
-        await discord.Member.add_roles(member, role)
-
-        print(discord.utils.get(guild.categories))
-        if(discord.utils.get(guild.categories, name="Text Channels")):
-            print("category exists")
-
-
-    
-    @bot.event
-    async def on_message(message):
-        if(message.author == bot.user):
-            return
-        
-        content = message.content.upper()
-        if(content.find("THANK YOU") > -1):
-            for i in message.mentions:
-                if i != message.author and i != bot.user:
-                    await message.channel.send(f'Gave +1 Rep to {i.mention}')
-        await bot.process_commands(message)
 
     def main():
         bot.run(TOKEN)
