@@ -34,7 +34,7 @@ class Sally:
         channel = discord.utils.get(
             guild.voice_channels, name=(f"Member Count: {guild.member_count - 1}")
         )
-        if channel is not None:
+        if channel:
             await channel.edit(name=(f"Member Count: {guild.member_count}"))
 
     @bot.event
@@ -43,7 +43,7 @@ class Sally:
         channel = discord.utils.get(
             guild.voice_channels, name=(f"Member Count: {guild.member_count + 1}")
         )
-        if channel is not None:
+        if channel:
             await channel.edit(name=(f"Member Count: {guild.member_count}"))
 
     @bot.event
@@ -62,7 +62,7 @@ class Sally:
     async def on_ready():
         print(f"Logged in as {bot.user.name}")
         guild = discord.utils.get(bot.guilds, name="SALLY HQ")
-        if guild is not None:
+        if guild:
             if discord.utils.get(guild.categories, name="🚀 Server Stats 🚀") is None:
                 category = await guild.create_category(name="🚀 Server Stats 🚀")
                 overwrites = {
