@@ -3,6 +3,11 @@ import discord
 from discord.ext import commands
 
 TOKEN = os.environ.get("TOKEN")
+DATABASE = os.environ.get("DATABASE")
+USER = os.environ.get("USER")
+PASSWORD = os.environ.get("PASSWORD")
+HOST = os.environ.get("HOST")
+PORT = os.environ.get("PORT")
 
 intents = discord.Intents.default()
 intents.members = True
