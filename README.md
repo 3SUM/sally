@@ -16,7 +16,7 @@ If you have questions or concerns please feel free to contact me here or on **Di
 
 ## Installation & Usage
 
-To use Sally you will need `Python 3.8`+ and the libraries listed in [requirments.txt]().
+To use Sally you will need `Python 3.8`+ and the libraries listed in [requirements.txt](/requirements.txt).
 
 A Discord `TOKEN` will need to acquired through the [Discord Developer portal](https://discord.com/developers/docs/intro).
 
