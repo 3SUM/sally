@@ -14,8 +14,8 @@ class Sally:
 
     @bot.event
     async def on_guild_join(guild):
-        if discord.utils.get(guild.categories, name="🚀 Server Stats 🚀") is None:
-            category = await guild.create_category(name="🚀 Server Stats 🚀")
+        if discord.utils.get(guild.categories, name="Server Stats") is None:
+            category = await guild.create_category(name="Server Stats")
             overwrites = {
                 guild.default_role: discord.PermissionOverwrite(connect=False)
             }
@@ -24,6 +24,8 @@ class Sally:
                 overwrites=overwrites,
                 category=category,
             )
+        if discord.utils.get(guild.categories, name ="Tickets") is None:
+            category = await guild.create_category(name="Tickets")
 
     @bot.event
     async def on_member_join(member):
@@ -92,6 +94,7 @@ class Sally:
                 )
                 await ctx.send(embed=failed_embed)
             else:
+                category = discord.utils.get(guild.categories, name="Tickets")
                 ta = discord.utils.get(guild.roles, name=course)
                 overwrites = {
                     guild.default_role: discord.PermissionOverwrite(
@@ -103,11 +106,12 @@ class Sally:
                 ticket_create = await guild.create_text_channel(
                     name=(f"ticket-{course}-{ctx.message.author.name}"),
                     overwrites=overwrites,
+                    category=category,
                 )
                 ticket_embed = discord.Embed(
                     title="Ticket",
                     description=(
-                        f"{ctx.message.author.mention}\nPlease be patient. A TA will be with you shortly."
+                        f"{ctx.message.author.mention}\nPlease ask your question and a TA will be with you shortly."
                     ),
                     color=0x15A513,
                 )
