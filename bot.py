@@ -124,7 +124,7 @@ class Sally:
 
         await ctx.send(embed=ce)
 
-    @bot.help()
+    @bot.command()
     async def help(ctx, cmd="default"):
         if str(cmd) in Sally.cmd_list:
             pass
