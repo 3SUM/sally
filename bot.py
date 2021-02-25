@@ -86,7 +86,7 @@ class Sally:
         data = None
         desc = None
         title = None
-        print(message)
+
         try:
             data = json.loads(message)
         except:
@@ -100,9 +100,22 @@ class Sally:
             return
 
         try:
+            desc = data["description"]
+        except:
+            desc = ""
+        
+        try:
             color = data["color"]
         except:
             color = 0xCF65E7
+
+        ce = discord.Embed(
+            title=title,
+            description=desc,
+            color=color,
+        )
+
+        await ctx.send(embed=ce)
 
     @bot.command()
     async def ticket(ctx, course="default"):
