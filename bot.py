@@ -85,7 +85,7 @@ class Sally:
         message = ctx.message.content
         try:
             data = json.loads(message)
-        else:
+        except:
             await ctx.send("embed: Error, no JSON provided!")
         title = ""
         desc = ""
