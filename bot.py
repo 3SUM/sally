@@ -8,11 +8,11 @@ TOKEN = os.environ.get("TOKEN")
 intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix="!", intents=intents)
-bot.remove_command('help')
+#bot.remove_command('help')
 
 class Sally:
     courses_list = ["135", "202", "218", "219", "370"]
-    cmd_list = ["close, courses, embed, help, ticket"]
+    #cmd_list = ["close, courses, embed, help, ticket"]
 
     @bot.event
     async def on_guild_join(guild):
@@ -123,7 +123,7 @@ class Sally:
             print("No fields!")
 
         await ctx.send(embed=ce)
-
+"""
     @bot.command()
     async def help(ctx, cmd="default"):
         if str(cmd) in Sally.cmd_list:
@@ -137,7 +137,7 @@ class Sally:
 
             help_menu.add_field(name='**Tickets**', value=f'```fix\nticket```', inline=True)
             await ctx.send(embed=help_menu)
-            
+ """           
 
         
 
