@@ -1,4 +1,5 @@
 import os
+import json
 import discord
 from discord.ext import commands
 
@@ -24,7 +25,7 @@ class Sally:
                 overwrites=overwrites,
                 category=category,
             )
-        if discord.utils.get(guild.categories, name ="Tickets") is None:
+        if discord.utils.get(guild.categories, name="Tickets") is None:
             category = await guild.create_category(name="Tickets")
 
     @bot.event
@@ -78,6 +79,19 @@ class Sally:
     @bot.command()
     async def courses(ctx):
         await ctx.send(f"Course Number Options:  `135`  `202`  `218`  `219`  `370`")
+
+    @bot.command()
+    async def embed(ctx):
+        message = ctx.message.content
+        data = json.loads(message)
+        title = ""
+        desc = ""
+        color = 0
+
+        try:
+            title = data["title"]
+        except:
+            await ctx.send("embed: Error, no title provided!")
 
     @bot.command()
     async def ticket(ctx, course="default"):
