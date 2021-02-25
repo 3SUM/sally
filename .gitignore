@@ -3,3 +3,4 @@ env/
 __pycache__/
 config.py
 .vscode/
+parser.py
