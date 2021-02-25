@@ -82,26 +82,28 @@ class Sally:
 
     @bot.command()
     async def embed(ctx):
+        color = None
+        data = None
+        desc = None
+        title = None
         message = ctx.message.content
+        print(message)
         try:
             data = json.loads(message)
         except:
-            raise await ctx.send("embed: Error, no JSON provided!")
-            # return
-
-        title = ""
-        desc = ""
-        color = 0
+            await ctx.send("`embed`: Error, JSON format invalid!")
+            return
 
         try:
             title = data["title"]
         except:
-            raise await ctx.send("embed: Error, no title provided!")
-            # return
+            await ctx.send("`embed`: Error, no title provided!")
+            return
 
-        # try:
-        #   color = data["color"]
-        # except:
+        try:
+            color = data["color"]
+        except:
+            color = 0xCF65E7
 
     @bot.command()
     async def ticket(ctx, course="default"):
