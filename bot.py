@@ -81,7 +81,7 @@ class Sally:
         await ctx.send(f"Course Number Options:  `135`  `202`  `218`  `219`  `370`")
 
     @bot.command()
-    async def embed(ctx, message: str = "default"):
+    async def embed(ctx, *, message):
         color = None
         data = None
         desc = None
