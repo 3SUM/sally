@@ -115,6 +115,12 @@ class Sally:
             color=color,
         )
 
+        try:
+            for field in data["fields"]:
+                ce.add_field(name=field["name"], value=field["value"], inline=False)
+        except:
+            print("No fields!")
+
         await ctx.send(embed=ce)
 
     @bot.command()
