@@ -86,7 +86,9 @@ class Sally:
         try:
             data = json.loads(message)
         except:
-            await ctx.send("embed: Error, no JSON provided!")
+            raise await ctx.send("embed: Error, no JSON provided!")
+            #return 
+
         title = ""
         desc = ""
         color = 0
@@ -94,7 +96,13 @@ class Sally:
         try:
             title = data["title"]
         except:
-            await ctx.send("embed: Error, no title provided!")
+            raise await ctx.send("embed: Error, no title provided!")
+            #return
+
+        try: 
+            color = data["color"]
+        except:
+
 
     @bot.command()
     async def ticket(ctx, course="default"):
