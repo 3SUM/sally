@@ -83,7 +83,10 @@ class Sally:
     @bot.command()
     async def embed(ctx):
         message = ctx.message.content
-        data = json.loads(message)
+        try:
+            data = json.loads(message)
+        else:
+            await ctx.send("embed: Error, no JSON provided!")
         title = ""
         desc = ""
         color = 0
