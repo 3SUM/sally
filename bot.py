@@ -8,7 +8,6 @@ TOKEN = os.environ.get("TOKEN")
 intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix="!", intents=intents)
-# bot.remove_command('help')
 
 
 class Sally:
@@ -84,7 +83,7 @@ class Sally:
 
     @bot.command()
     async def embed(ctx, *, message):
-        color = None
+        color = 0xCF65E7
         data = None
         desc = None
         title = None
@@ -101,15 +100,11 @@ class Sally:
             await ctx.send("`embed`: Error, no title provided!")
             return
 
-        try:
+        if "description" in data:
             desc = data["description"]
-        except:
-            desc = ""
 
-        try:
+        if "color" in data:
             color = data["color"]
-        except:
-            color = 0xCF65E7
 
         ce = discord.Embed(
             title=title,
@@ -117,11 +112,9 @@ class Sally:
             color=color,
         )
 
-        try:
+        if "fields" in data:
             for field in data["fields"]:
                 ce.add_field(name=field["name"], value=field["value"], inline=False)
-        except:
-            print("No fields!")
 
         await ctx.send(embed=ce)
 
