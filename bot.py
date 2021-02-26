@@ -116,7 +116,8 @@ class Sally:
             for field in data["fields"]:
                 ce.add_field(name=field["name"], value=field["value"], inline=False)
 
-        await ctx.send(embed=ce)
+        if await ctx.send(embed=ce):
+            await message.delete(message)
 
     @bot.command()
     async def ticket(ctx, course="default"):
