@@ -64,7 +64,7 @@ class Sally:
     @bot.command()
     async def history(ctx):
         messages = await ctx.message.channel.history(limit=999).flatten()
-        for message in messages:
+        for message in reversed(messages):
             print(message.content)
 
     @bot.command()
