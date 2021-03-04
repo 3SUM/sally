@@ -62,6 +62,11 @@ class Sally:
         print(f"Logged in as {bot.user.name}")
 
     @bot.command()
+    async def history(ctx):
+        messages = await ctx.message.channel.history(limit=999).flatten()
+        print(messages)
+        
+    @bot.command()
     async def close(ctx):
         guild = ctx.message.guild
         member = ctx.message.author
