@@ -64,8 +64,12 @@ class Sally:
     @bot.command()
     async def history(ctx):
         messages = await ctx.message.channel.history(limit=999).flatten()
-        for message in reversed(messages):
-            print(message.content)
+        with open("history.txt", "w") as file:
+            for message in reversed(messages):
+                file.write(message.content)
+        with open("history.txt", "rb") as file:
+            await ctx.send("Your file is:", file=discord.File(file, "history.txt"))
+
 
     @bot.command()
     async def close(ctx):
