@@ -63,13 +63,20 @@ class Sally:
 
     @bot.command()
     async def history(ctx):
-        messages = await ctx.message.channel.history(limit=999).flatten()
+        send_to = None
+        channel = ctx.message.channel
+        for member in channel.members:
+            for role in member.roles:
+                if role.name == "Student" or role.name == "Contributor":
+                    send_to = member
+                    break
+        messages = await channel.history(limit=999).flatten()
         with open("history.txt", "w") as file:
             for message in reversed(messages):
                 file.write(f"User: {message.author.name} -> {message.content}\n")
         with open("history.txt", "rb") as file:
-            await ctx.send("Your file is:", file=discord.File(file, "history.txt"))
-
+            dm_channel = await send_to.create_dm()
+            await dm_channel.send("Your file is:", file=discord.File(file, "history.txt"))
 
     @bot.command()
     async def close(ctx):
