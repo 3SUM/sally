@@ -62,23 +62,6 @@ class Sally:
         print(f"Logged in as {bot.user.name}")
 
     @bot.command()
-    async def history(ctx):
-        send_to = None
-        channel = ctx.message.channel
-        for member in channel.members:
-            for role in member.roles:
-                if role.name == "Student" or role.name == "Contributor":
-                    send_to = member
-                    break
-        messages = await channel.history(limit=999).flatten()
-        with open("ticket.txt", "w") as file:
-            for message in reversed(messages):
-                file.write(f"User: {message.author.name} -> {message.content}\n")
-        with open("ticket.txt", "rb") as file:
-            dm_channel = await send_to.create_dm()
-            await dm_channel.send("Your ticket has been closed, below is the ticket history:", file=discord.File(file, "ticket.txt"))
-
-    @bot.command()
     async def close(ctx):
         guild = ctx.message.guild
         member = ctx.message.author
@@ -95,10 +78,15 @@ class Sally:
                 messages = await ctx.message.channel.history(limit=999).flatten()
                 with open("ticket.txt", "w") as file:
                     for message in reversed(messages):
-                        file.write(f"User: {message.author.name} -> {message.content}\n")
+                        file.write(
+                            f"User: {message.author.name} -> {message.content}\n"
+                        )
                 with open("ticket.txt", "rb") as file:
                     dm_channel = await send_to.create_dm()
-                    await dm_channel.send("Your ticket has been closed, attached is the ticket history:", file=discord.File(file, "ticket.txt"))
+                    await dm_channel.send(
+                        "Your ticket has been closed, attached is the ticket history:",
+                        file=discord.File(file, "ticket.txt"),
+                    )
                 await ctx.message.channel.delete()
             else:
                 await ctx.send("Unable to close, this is not a ticket!")
