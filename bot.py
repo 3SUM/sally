@@ -67,6 +67,7 @@ class Sally:
         with open("history.txt", "w") as file:
             for message in reversed(messages):
                 file.write(message.content)
+                file.write('\n')
         with open("history.txt", "rb") as file:
             await ctx.send("Your file is:", file=discord.File(file, "history.txt"))
 
