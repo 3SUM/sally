@@ -64,8 +64,9 @@ class Sally:
     @bot.command()
     async def history(ctx):
         messages = await ctx.message.channel.history(limit=999).flatten()
-        print(messages)
-        
+        for message in messages:
+            print(message.content)
+
     @bot.command()
     async def close(ctx):
         guild = ctx.message.guild
