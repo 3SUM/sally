@@ -66,8 +66,7 @@ class Sally:
         messages = await ctx.message.channel.history(limit=999).flatten()
         with open("history.txt", "w") as file:
             for message in reversed(messages):
-                file.write(f"User: {message.author.name} -> {message.content}")
-                file.write('\n')
+                file.write(f"User: {message.author.name} -> {message.content}\n")
         with open("history.txt", "rb") as file:
             await ctx.send("Your file is:", file=discord.File(file, "history.txt"))
 
