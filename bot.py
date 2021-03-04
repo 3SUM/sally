@@ -121,8 +121,17 @@ class Sally:
 
     @bot.command()
     async def ticket(ctx, course="default"):
+        guild = ctx.message.guild
+        request_channel = discord.utils.get(guild.channels, name="request")
+        if ctx.message.channel != request_channel:
+            failed_embed = discord.Embed(
+                title="Failed to create a ticket",
+                description=f"Ticket must be created in {request_channel.mention}!",
+                color=0xE73C24,
+            )
+            await ctx.send(embed=failed_embed)
+            return
         if str(course) in Sally.courses_list:
-            guild = ctx.message.guild
             if discord.utils.get(
                 guild.channels,
                 name=(f"ticket-{course}-{ctx.message.author.name.lower()}"),
