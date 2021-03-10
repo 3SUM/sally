@@ -71,7 +71,7 @@ class Sally:
         if ta_role in member_roles:
             if ctx.message.channel.name.find("ticket") > -1:
                 messages = await ctx.message.channel.history(limit=999).flatten()
-                get_user_str = messages[-1].embeds[0].description.split('\n')
+                get_user_str = messages[-1].embeds[0].description.split("\n")
                 user_id = int(re.sub("[^0-9]", "", get_user_str[0]))
                 send_to = guild.get_member(user_id)
                 with open("ticket.txt", "w") as file:
