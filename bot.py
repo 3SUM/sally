@@ -1,3 +1,4 @@
+import re
 import os
 import json
 import discord
@@ -72,7 +73,7 @@ class Sally:
                 send_to = None
                 messages = await ctx.message.channel.history(limit=999).flatten()
                 get_user_str = messages[-1].embeds[0].description.split('\n')
-                print(get_user_str[0].split("<@!"))
+                print(re.sub("[^0-9]", "", get_user_str[0]))
                 print(guild.get_member(518135401349644289))
                 with open("ticket.txt", "w") as file:
                     for message in reversed(messages):
