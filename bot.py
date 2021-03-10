@@ -66,11 +66,12 @@ class Sally:
         member = ctx.message.author
         member_roles = member.roles
         ta_role = discord.utils.get(guild.roles, name="TA")
+
         if ta_role in member_roles:
             if ctx.message.channel.name.find("ticket") > -1:
                 send_to = None
                 messages = await ctx.message.channel.history(limit=999).flatten()
-                print(messages[-1].mentions)
+                print(messages[-1])
                 with open("ticket.txt", "w") as file:
                     for message in reversed(messages):
                         file.write(
