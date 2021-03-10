@@ -12,7 +12,6 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 class Sally:
     courses_list = ["135", "202", "218", "219", "370"]
-    # cmd_list = ["close, courses, embed, help, ticket"]
 
     @bot.event
     async def on_guild_join(guild):
@@ -70,12 +69,8 @@ class Sally:
         if ta_role in member_roles:
             if ctx.message.channel.name.find("ticket") > -1:
                 send_to = None
-                for member in ctx.message.channel.members:
-                    for role in member.roles:
-                        if role.name == "Student" or role.name == "Contributor":
-                            send_to = member
-                            break
                 messages = await ctx.message.channel.history(limit=999).flatten()
+                print(messages[-1].mentions)
                 with open("ticket.txt", "w") as file:
                     for message in reversed(messages):
                         file.write(
