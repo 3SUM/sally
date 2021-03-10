@@ -71,7 +71,7 @@ class Sally:
             if ctx.message.channel.name.find("ticket") > -1:
                 send_to = None
                 messages = await ctx.message.channel.history(limit=999).flatten()
-                print(messages[-1].embeds[0].description)
+                print(messages[-1].embeds[0].to_dict())
                 with open("ticket.txt", "w") as file:
                     for message in reversed(messages):
                         file.write(
